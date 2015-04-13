@@ -44,7 +44,11 @@ def testImage(hog, path, clf):
     '''
     im = cv2.imread(path)
     h = hog.compute(im).ravel()
-    print clf.predict(h)
+    #~ print clf.predict(h)
+    if clf.predict(h)[0] == 1 : 
+        print "Elephant Detected"
+    else: 
+        print "No Elephant Is Detected"
 
 def SVM_train(x_train, y_train):
     '''
