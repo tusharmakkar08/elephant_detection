@@ -19,8 +19,25 @@ def train_positive():
         print i,len(h)
         out_pos_train.append(1)
     return inp_pos_train, out_pos_train
-    
 
+def train_negative():
+    '''
+    Training negative elephant sample
+    '''
+    hog = cv2.HOGDescriptor()
+    inp_neg_train = []
+    out_neg_train = []
+    for i in xrange(1,4):
+        if i<10:
+            image_no = "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/image_000"+str(i)+".jpg"
+        else:
+            image_no = "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/image_00"+str(i)+".jpg"
+        im = cv2.imread(image_no)
+        h = hog.compute(im)
+        inp_neg_train.append(h)
+        print i,len(h)
+        out_neg_train.append(0)
+    return inp_neg_train, out_neg_train
     
 def SVM_train(x_train, y_train):
     clf = svm.SVC(C = 5., gamma =0.001)
