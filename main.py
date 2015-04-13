@@ -84,7 +84,7 @@ def resizeImages(path, totalNo, size):
         #~ print cmd
         os.system(cmd)
         
-def saveClassifier(classifer):
+def saveClassifier(classifier):
     '''
     saves the clasifier
     INPUT
@@ -93,11 +93,25 @@ def saveClassifier(classifer):
     Boolean variable whether the save operation was successful or not
     '''
     try :
-        joblib.dump(classifer, 'classifier.pkl')
+        joblib.dump(classifier, 'classifier.pkl')
         return True
     except :
         return False
-        
+
+def loadClassifier(path):
+    '''
+    saves the clasifier
+    INPUT
+    path : Path where pickle file exists
+    OUTPUT
+    Returns the classifier
+    '''
+    try :
+        classifier = joblib.load(path)
+        return classifier
+    except :
+        return False
+                
 if __name__ == "__main__":
     '''
     Main function where everything is called
@@ -105,10 +119,11 @@ if __name__ == "__main__":
     #~ resizeImages("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/", 78, "200x128")
     #~ resizeImages("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/", 78, "200x128")
     hog = cv2.HOGDescriptor()
-    x_pos_train, y_pos_train = trainSample(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/", 78, 1)
-    x_neg_train, y_neg_train = trainSample(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/", 78, 0)
-    x_train = x_pos_train + x_neg_train
-    y_train = y_pos_train + y_neg_train
-    main_classifier = SVM_train(x_train, y_train)
-    saveClassifier(main_classifier)
+    #~ x_pos_train, y_pos_train = trainSample(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/", 78, 1)
+    #~ x_neg_train, y_neg_train = trainSample(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/", 78, 0)
+    #~ x_train = x_pos_train + x_neg_train
+    #~ y_train = y_pos_train + y_neg_train
+    #~ main_classifier = SVM_train(x_train, y_train)
+    #~ saveClassifier(main_classifier)
+    main_classifier = loadClassifier('classifier.pkl')
     testImage(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/imagemod_0005.jpg", main_classifier)
