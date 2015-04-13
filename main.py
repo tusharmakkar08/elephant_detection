@@ -126,4 +126,4 @@ if __name__ == "__main__":
     #~ main_classifier = SVM_train(x_train, y_train)
     #~ saveClassifier(main_classifier)
     main_classifier = loadClassifier('classifier.pkl')
-    testImage(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/imagemod_0005.jpg", main_classifier)
+    testImage(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/Test/test.jpg", main_classifier)
