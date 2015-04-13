@@ -1,7 +1,7 @@
 import cv2, numpy, os
 from sklearn import svm
 
-def trainSample(path, totalNo):
+def trainSample(path, totalNo, classNo):
     '''
     Training positive elephant sample
     '''
@@ -15,9 +15,9 @@ def trainSample(path, totalNo):
             image_no = path + "imagemod_00" + str(i) + ".jpg"
         im = cv2.imread(image_no)
         h = hog.compute(im)
-        inp_train.append(h)
-        print i,len(h)
-        out_train.append(1)
+        inp_train.append(h.ravel())
+        #~ print i,len(h)
+        out_train.append(classNo)
     return inp_train, out_train
 
 def SVM_train(x_train, y_train):
@@ -40,8 +40,8 @@ def resizeImages(path, totalNo, size):
 if __name__ == "__main__":
     #~ resizeImages("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/",79, "200x128")
     #~ resizeImages("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/",5, "200x128")
-    x_pos_train, y_pos_train = trainSample("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/", 3)
-    x_neg_train, y_neg_train = trainSample("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/", 3)
+    x_pos_train, y_pos_train = trainSample("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalPositive/", 79, 1)
+    x_neg_train, y_neg_train = trainSample("/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/", 5, 0)
     x_train = x_pos_train + x_neg_train
     y_train = y_pos_train + y_neg_train
     main_classifier = SVM_train(x_train, y_train)
