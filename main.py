@@ -5,6 +5,7 @@ Author: Tushar Makkar <tusharmakkar08[at]gmail.com>
 
 import cv2, numpy, os
 from sklearn import svm
+from sklearn.externals import joblib
 
 def trainSample(hog, path, totalNo, classNo):
     '''
@@ -83,6 +84,20 @@ def resizeImages(path, totalNo, size):
         #~ print cmd
         os.system(cmd)
         
+def saveClassifier(classifer):
+    '''
+    saves the clasifier
+    INPUT
+    classifier : Classifier which we want to dump
+    OUTPUT
+    Boolean variable whether the save operation was successful or not
+    '''
+    try :
+        joblib.dump(classifer, 'classifier.pkl')
+        return True
+    except :
+        return False
+        
 if __name__ == "__main__":
     '''
     Main function where everything is called
@@ -95,4 +110,5 @@ if __name__ == "__main__":
     x_train = x_pos_train + x_neg_train
     y_train = y_pos_train + y_neg_train
     main_classifier = SVM_train(x_train, y_train)
+    saveClassifier(main_classifier)
     testImage(hog, "/home/tusharmakkar08/Desktop/ImageProcessing/Data/TotalNegative/imagemod_0005.jpg", main_classifier)
