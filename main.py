@@ -48,10 +48,10 @@ def testImage(hog, path, clf):
     h = hog.compute(im).ravel()
     #~ print clf.predict(h)
     if clf.predict(h)[0] == 1 : 
-        print "Elephant Detected"
+        #~ print "Elephant Detected"
         return 1
     else: 
-        print "No Elephant Is Detected"
+        #~ print "No Elephant Is Detected"
         return 0
 
 def SVM_train(x_train, y_train):
@@ -139,14 +139,14 @@ def testAccuracy(path, N, hog, main_classifier):
                 accuracyParameter += 1
             else:
                 fn += 1
-                print image_no
+                print "False Result for", image_no
         else:
             if (testImage(hog, image_no, main_classifier) == 1):
                 accuracyParameter += 1
             else:
                 fp += 1
-                print image_no
-    print accuracyParameter
+                print "False Result for", image_no
+    #~ print accuracyParameter
     return accuracyParameter*100.0 / (N*1.0), fn*100.0 / (N*1.0), fp*100.0 / (N*1.0) 
     
 if __name__ == "__main__":
