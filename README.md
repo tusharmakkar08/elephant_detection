@@ -5,7 +5,6 @@ Elephants Detection and Classifier
 * SVM Training Model
 
 #### TODO : 
-* Accuracy checker
 * Crossfold Validation
 
 #### Requirements :
