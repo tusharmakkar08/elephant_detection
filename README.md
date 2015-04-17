@@ -20,5 +20,6 @@ Elephants Detection and Classifier
 * Run `python main.py`
 
 #### How to Test Images ? 
-* Do same steps as How to run ? 
-* Call `testImage` fucntion with the image name and classifier.
+* Follow same steps as `How to run ?` 
+* Modify `main function` by calling `testImage` fucntion with the image name and classifier.
+* Run `python main.py`
